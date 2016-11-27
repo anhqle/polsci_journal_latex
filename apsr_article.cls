@@ -9,24 +9,35 @@
 
 \LoadClass[12pt]{article} % APSR: main text is 12 pt
 
+% APSR: double space, including footnote
+\RequirePackage{setspace}
+\doublespacing
+
+\RequirePackage{letltxmacro}
+\LetLtxMacro{\oldfootnote}{\footnote}
+\renewcommand{\footnote}[1]{\oldfootnote{\begin{doublespace}#1\end{doublespace}}}
+
+% APSR: single space in table and captions
+\RequirePackage{etoolbox}
+\preto\table{\par\singlespacing}
+
+% APSR: footnote same size as text
+\renewcommand*{\footnotesize}{\normalsize} 
+
+% APSR bibliography
+\RequirePackage{natbib}
+\setcitestyle{aysep={}} % APSR: no comma between author year
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Non-APSR specific packages and settings
+
 \RequirePackage[margin=1in]{geometry}  % set the margins to 1in on all sides
 \RequirePackage{graphicx}              % to include figures
 
 \RequirePackage{amsmath}      % great math stuff
 \RequirePackage{amsfonts}     % for blackboard bold, etc
 
-% APSR: double space, including footnote, but not caption/table
-\RequirePackage{setspace}
-\doublespacing
-\RequirePackage{etoolbox}
-\preto\table{\par\singlespacing}
-
-\RequirePackage{letltxmacro}
-\LetLtxMacro{\oldfootnote}{\footnote}
-\renewcommand{\footnote}[1]{\oldfootnote{\begin{doublespace}#1\end{doublespace}}}
-
-\renewcommand*{\footnotesize}{\normalsize} % APSR: footnote same size as text
-
+\RequirePackage{cleveref} % \Cref, \cref
 \RequirePackage{rotating} % for sideway table
 
 % colored link
@@ -39,12 +50,5 @@
     urlcolor={blue!80!black}
 }
 
-%\RequirePackage{float}
-%\restylefloat{table}
-\RequirePackage{caption} % Can inser newline \\ in caption
+\RequirePackage{caption} % Can insert newline \\ in caption
 \RequirePackage{placeins} % \FloatBarrier
-
-% bibliography
-\RequirePackage{cleveref} % \Cref, \cref
-\RequirePackage{natbib}
-\setcitestyle{aysep={}} % APSR: no comma between author year
